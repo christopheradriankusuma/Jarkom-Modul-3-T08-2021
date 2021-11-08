@@ -11,21 +11,19 @@ options {
         // the all-0's placeholder.
 
         listen-on port 53 { 127.0.0.1; 192.215.2.2; };
-        allow-query     { localhost; 192.215.1.0/24; 192.215.3.0/24; };
-        allow-transfer  { localhost; 192.215.2.2; };
-        allow-recursion { localhost; 192.215.1.0/24; 192.215.3.0/24; };
+        allow-query     { any; };
+        allow-transfer  { any; };
+        allow-recursion { any; };
 
         recursion yes;
 
-        forwarders {
-                192.168.122.1;
-        };
+        forwarders { 192.168.122.1; };
 
         //========================================================================
         // If BIND logs error messages about the root key being expired,
         // you will need to update your keys.  See https://www.isc.org/bind-keys
         //========================================================================
-        dnssec-validation auto;
+        //dnssec-validation auto;
 
         auth-nxdomain no;    # conform to RFC1035
         listen-on-v6 { any; };
