@@ -1,0 +1,4 @@
+zone "super.franky.t08.com" {
+        type master;
+        file "/etc/bind/web/super.franky.t08.com";
+};

@@ -1,0 +1,1 @@
+route add default gw 192.215.1.1
