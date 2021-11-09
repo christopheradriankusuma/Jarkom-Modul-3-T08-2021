@@ -2,3 +2,8 @@ zone "super.franky.t08.com" {
         type master;
         file "/etc/bind/web/super.franky.t08.com";
 };
+
+zone "jualbelikapal.t08.com" {
+        type master;
+        file "/etc/bind/proxy/jualbelikapal.t08.com";
+};
