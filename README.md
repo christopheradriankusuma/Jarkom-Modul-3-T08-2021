@@ -102,3 +102,25 @@ Lalu melakukan `service squid restart`. Selanjutnya mencoba membuka `google.com`
 ![Soal 11_2](images/11_2.png)
 
 Dapat telihat bahwa website `google.com` akan langsung di redirect ke `super.franky.t08.com`.
+
+## 12. Saatnya berlayar! Luffy dan Zoro akhirnya memutuskan untuk berlayar untuk mencari harta karun di `super.franky.yyy.com`. Tugas pencarian dibagi menjadi dua misi, Luffy bertugas untuk mendapatkan gambar (.png, .jpg), sedangkan Zoro mendapatkan sisanya. Karena Luffy orangnya sangat teliti untuk mencari harta karun, ketika ia berhasil mendapatkan gambar, ia mendapatkan gambar dan melihatnya dengan kecepatan 10 kbps.
+
+### Solusi
+Pertama-tama kita membuat sebuah file baru pada `/etc/squid` yaitu `acl-bandiwth.conf`. Dengan isi file seperti dibawah ini.
+
+![Soal 12_1](images/12_1.png)
+
+Selanjutnya kita menambah beberapa konfigurasi pada `/etc/squid/squid.conf`. Dapat dilihat beberapa konfigurasi dibawah ini yang berupa.
+
+![Soal 12_2](images/12_2.png)
+
+Selanjutnya kita dapat melakukan test pada *loguetown* dan *tottoland* yang dimana kita bagi kedua delay pools. *Loguetown* untuk luffy dan *tottoland* untuk zoro. Dapat dilihat dibawah ini saat kita melakukan test pada area *loguetown*.
+
+![Soal 12_3](images/12_3.png)
+
+## 13. Sedangkan, Zoro yang sangat bersemangat untuk mencari harta karun, sehingga kecepatan kapal Zoro tidak dibatasi ketika sudah mendapatkan harta yang diinginkannya.
+
+### Solusi
+Dengan Konfigurasi pada soal no.12, dapat kita lihat pada delay pools, zoro tidak memiliki pembatasan bandwith sehingga download speednya berjalan dengan normal, berikut merupakan hasil yang didapatkan saat melakukan speedtest pada *tottoland*
+
+![Soal 13_1](images/13_1.png)
