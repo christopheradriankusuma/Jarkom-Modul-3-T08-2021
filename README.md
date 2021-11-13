@@ -1,5 +1,109 @@
 # Jarkom-Modul-3-T08-2021
 
+Laporan Resmi Praktikum Jarkom Modul 3
+
+Disusun oleh :
+* Clarissa Fatimah (05311940000012)
+* Alessandro Tionardo (05311940000018)
+* Christoper Adrian Kusuma (05311940000022)
+
+---
+
+## 1. Luffy bersama Zoro berencana membuat peta tersebut dengan kriteria EniesLobby sebagai DNS Server, Jipangu sebagai DHCP Server, Water7 sebagai Proxy Server (1), Susun topologi sesuai dengan permintaan soal shift, dan mengatur konfigurasi jaringan pada setiap node.
+![Soal 1-1](images/1.1.png)
+
+### Solusi
+Pada EniesLobby lalukan install :
+```
+apt-get install bind9 -y
+```
+Lalu dengan *nano /etc/bind/named.conf.local*, tambahkan 
+```
+zone "super.franky.t08.com" {
+        type master;
+        file "/etc/bind/web/super.franky.t08.com";
+};
+
+zone "jualbelikapal.t08.com" {
+        type master;
+        file "/etc/bind/proxy/jualbelikapal.t08.com";
+};
+```
+![Soal 1-2](images/1.2.png)
+<br>
+
+lalu membuat folder web pada `/etc/bind/` dengan
+`mkdir /etc/bind/web`
+lalu copykan file db.local pada path `/etc/bind` ke dalam folder web 
+`cp /etc/bind/db.local /etc/bind/web/super.franky.t08.com`
+Kemudan konfigurasi file <b>super.franky.t08.com</b>
+![Soal 1-3](images/1.3.png)
+<br>
+
+Pada Jipangu lakukan install : 
+```
+apt-get install isc-dhcp-server
+```
+Lalu melakukan konfigurasi dengan `nano /etc/default/isc-dhcp-server`
+Pada bagian INTERFACES isikan `eth0
+INTERFACES="eth0"`
+![Soal 1-4](images/1.4.png)
+<br>
+
+Pada Water7 melakukan install :
+```
+apt-get install squid
+```
+Buat konfigurasi Squid baru Pada file `/etc/squid/squid.conf
+http_port 5000
+visible_hostname jualbelikapal.t08.com`
+![Soal 1-5](images/1.5.png)
+
+## 2. dan Foosha sebagai DHCP Relay (2). Luffy dan Zoro menyusun peta tersebut dengan hati-hati dan teliti.
+pada foosha lakukan install :
+```
+apt-get install isc-dhcp-relay
+```
+lalu dengan `nano /etc/default/isc-dhcp-relay`
+![Soal 2-1](images/2.1.png)
+menambahkan `SERVERS=”192.215.2.4"` dalam DHCP relay forward
+menambahkan `INTERFACES=”eth1 eth3”` dalam interface DHCP relay request
+
+## 3. Semua client yang ada HARUS menggunakan konfigurasi IP dari DHCP Server. Client yang melalui Switch1 mendapatkan range IP dari [prefix IP].1.20 - [prefix IP].1.99 dan [prefix IP].1.150 - [prefix IP].1.169
+Edit file konfigurasi `/etc/dhcp/dhcpd.conf pada subnet 192.215.1.0` dengan menambahkan range 
+```
+range 192.215.1.20 192.215.1.99;
+range 192.215.1.150 192.215.1.169;
+```
+![Soal 3-1](images/3.1.png)
+
+## 4. Client yang melalui Switch3 mendapatkan range IP dari [prefix IP].3.30 - [prefix IP].3.50
+Edit file konfigurasi `/etc/dhcp/dhcpd.conf pada subnet 192.215.3.0` dengan menambahkan range 
+```
+range 192.215.3.30 192.215.3.50;
+
+```
+![Soal 4-1](images/4.1.png)
+
+## 5. Client mendapatkan DNS dari EniesLobby dan client dapat terhubung dengan internet melalui DNS tersebut.
+
+Melakukan edit file konfigurasi `/etc/dhcp/dhcpd.conf(subnet 192.215.1.0 dan 192.215.3.0) ` pada `option domain-name-servers` sesuai dengan <b>IP EniesLobby</b>
+![Soal 5-1](images/5.1.png)
+
+## 6. Lama waktu DHCP server meminjamkan alamat IP kepada Client yang melalui Switch1 selama 6 menit sedangkan pada client yang melalui Switch3 selama 12 menit. Dengan waktu maksimal yang dialokasikan untuk peminjaman alamat IP selama 120 menit.
+Melakukan edit file konfigurasi `/etc/dhcp/dhcpd.conf(subnet 192.215.1.0 dan 192.215.3.0) `pada <b>default-lease-time</b> dan <b>max-lease-time</b>
+```
+subnet 192.215.1.0
+```
+![Soal 6-1](images/6.1.png)
+
+```
+subnet 192.215.3.0
+```
+![Soal 6-2](images/6.2.png)
+
+
+
 ## 7. Luffy dan Zoro berencana menjadikan Skypie sebagai server untuk jual beli kapal yang dimilikinya dengan alamat IP yang tetap dengan IP [prefix IP].3.69 .
 
 ### Solusi
