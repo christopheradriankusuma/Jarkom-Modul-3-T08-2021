@@ -37,6 +37,7 @@ lalu membuat folder web pada `/etc/bind/` dengan
 lalu copykan file db.local pada path `/etc/bind` ke dalam folder web 
 `cp /etc/bind/db.local /etc/bind/web/super.franky.t08.com`
 Kemudan konfigurasi file <b>super.franky.t08.com</b>
+<br>
 ![Soal 1-3](images/1.3.png)
 <br>
 
@@ -57,6 +58,7 @@ apt-get install squid
 Buat konfigurasi Squid baru Pada file `/etc/squid/squid.conf
 http_port 5000
 visible_hostname jualbelikapal.t08.com`
+<br>
 ![Soal 1-5](images/1.5.png)
 
 ## 2. dan Foosha sebagai DHCP Relay (2). Luffy dan Zoro menyusun peta tersebut dengan hati-hati dan teliti.
