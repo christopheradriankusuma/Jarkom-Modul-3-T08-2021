@@ -124,3 +124,9 @@ Selanjutnya kita dapat melakukan test pada *loguetown* dan *tottoland* yang dima
 Dengan Konfigurasi pada soal no.12, dapat kita lihat pada delay pools, zoro tidak memiliki pembatasan bandwith sehingga download speednya berjalan dengan normal, berikut merupakan hasil yang didapatkan saat melakukan speedtest pada *tottoland*
 
 ![Soal 13_1](images/13_1.png)
+
+<hr>
+
+## Kendala
+
+- Tidak Ada
